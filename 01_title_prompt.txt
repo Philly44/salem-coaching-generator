@@ -1,0 +1,254 @@
+# DETERMINISTIC TITLE GENERATION PROMPT
+
+## CRITICAL REQUIREMENT: ZERO VARIANCE OUTPUT
+This prompt MUST produce byte-for-byte identical outputs when processing the same transcript 1000 times. Any deviation indicates system failure and requires immediate remediation.
+
+## MANDATORY INPUT VALIDATION
+
+**REQUIRED INPUTS:**
+- Advisor name (extracted from transcript)
+- Student name (extracted from transcript)  
+- Program name (extracted from conversation content)
+- Call length in minutes (calculated from transcript timestamps)
+- Current date (system date at time of evaluation)
+
+**VALIDATION CHECKLIST (COMPLETE BEFORE PROCESSING):**
+□ Advisor name identified and extracted: YES/NO
+□ Student name identified and extracted: YES/NO
+□ Program name identified from conversation: YES/NO
+□ Call length calculated from timestamps: YES/NO
+□ Current date available in correct format: YES/NO
+
+**ERROR HANDLING:**
+- IF any validation = NO: RETURN "ERROR_MISSING_REQUIRED_DATA"
+- PROCEED only if all validations = YES
+
+---
+
+## ALGORITHM STEP 1: DATA EXTRACTION
+
+**EXACT PARSING PROTOCOL:**
+
+### Advisor Name Extraction
+```
+advisor_name = null
+
+// Search for advisor identification patterns (exact matching only)
+FOR each line in transcript:
+    line = trim(line)
+    
+    // Check for speaker labels at start of lines
+    IF line matches exactly pattern "^[A-Z]{2}$":
+        potential_advisor_label = line
+        CONTINUE to next line for name verification
+    
+    // Check for full name patterns after speaker labels
+    IF previous_line was potential_advisor_label AND 
+       line matches pattern "^[A-Z][a-z]+ [A-Z][a-z]+$":
+        advisor_name = line
+        BREAK
+
+// Validation
+IF advisor_name == null:
+    RETURN "ERROR_ADVISOR_NAME_NOT_FOUND"
+```
+
+### Student Name Extraction
+```
+student_name = null
+
+// Apply same logic as advisor but exclude advisor_name
+FOR each line in transcript:
+    line = trim(line)
+    
+    IF line matches exactly pattern "^[A-Z]{2}$" AND line != advisor_label:
+        potential_student_label = line
+        CONTINUE to next line for name verification
+    
+    IF previous_line was potential_student_label AND 
+       line matches pattern "^[A-Z][a-z]+ [A-Z][a-z]+$" AND
+       line != advisor_name:
+        student_name = line
+        BREAK
+
+// Validation
+IF student_name == null:
+    RETURN "ERROR_STUDENT_NAME_NOT_FOUND"
+```
+
+### Program Name Extraction
+```
+program_name = "Program Not Specified"
+
+// Search for program mentions in conversation content
+program_keywords = [
+    "physical education", "pe", "phys ed",
+    "business", "nursing", "education",
+    "psychology", "criminal justice",
+    "information technology", "it"
+]
+
+FOR each line in transcript:
+    line_lower = lowercase(line)
+    FOR each keyword in program_keywords:
+        IF line_lower contains keyword:
+            // Apply specific program name mapping
+            program_name = MAP_TO_STANDARD_NAME(keyword)
+            BREAK
+
+// Standard name mapping
+MAP_TO_STANDARD_NAME(keyword):
+    IF keyword in ["physical education", "pe", "phys ed"]:
+        IF transcript contains "non-licensure":
+            RETURN "Physical Education (Non-licensure)"
+        ELSE IF transcript contains "licensure":
+            RETURN "Physical Education (Licensure)"
+        ELSE:
+            RETURN "Physical Education"
+    // Add other program mappings as needed
+```
+
+### Call Length Calculation
+```
+timestamps = []
+
+// Extract all timestamps (format MM:SS)
+FOR each line in transcript:
+    line = trim(line)
+    IF line matches regex pattern "^\d{2}:\d{2}$":
+        timestamps.append(line)
+
+// Convert to seconds and find duration
+IF timestamps.length >= 2:
+    first_timestamp = timestamps[0]
+    last_timestamp = timestamps[timestamps.length - 1]
+    
+    first_seconds = convert_to_seconds(first_timestamp)
+    last_seconds = convert_to_seconds(last_timestamp)
+    
+    duration_seconds = last_seconds - first_seconds
+    duration_minutes = Math.round(duration_seconds / 60)
+    
+    call_length = duration_minutes
+ELSE:
+    RETURN "ERROR_INSUFFICIENT_TIMESTAMPS"
+
+convert_to_seconds(timestamp):
+    parts = timestamp.split(":")
+    minutes = parseInt(parts[0])
+    seconds = parseInt(parts[1])
+    RETURN (minutes * 60) + seconds
+```
+
+### Current Date Formatting
+```
+current_date = get_system_date()
+
+// MANDATORY FORMAT: "Month DD, YYYY"
+month_names = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+]
+
+formatted_date = month_names[current_date.month - 1] + " " + 
+                 current_date.day + ", " + 
+                 current_date.year
+
+// Validation: ensure no leading zeros for single-digit days
+IF formatted_date contains " 0":
+    RETURN "ERROR_INVALID_DATE_FORMAT"
+```
+
+---
+
+## ALGORITHM STEP 2: TEMPLATE GENERATION
+
+**EXACT TEMPLATE (ZERO MODIFICATIONS ALLOWED):**
+```
+TEMPLATE = "**Advisor: {ADVISOR_NAME} | Student: {STUDENT_NAME} | Program: {PROGRAM_NAME} | Call Length: {CALL_LENGTH} minutes | Evaluated On: {CURRENT_DATE}**"
+```
+
+**TEMPLATE SUBSTITUTION RULES:**
+- `{ADVISOR_NAME}` = advisor_name (exact string from extraction)
+- `{STUDENT_NAME}` = student_name (exact string from extraction)
+- `{PROGRAM_NAME}` = program_name (mapped standard name)
+- `{CALL_LENGTH}` = call_length (integer, no decimals)
+- `{CURRENT_DATE}` = formatted_date (Month DD, YYYY format)
+
+**FORMATTING REQUIREMENTS:**
+- Use exact double asterisks at start and end: `**text**`
+- No extra spaces inside asterisks
+- Pipe symbols with single spaces: ` | `
+- No additional formatting or line breaks
+- Case sensitivity maintained as extracted
+
+---
+
+## PRE-OUTPUT VALIDATION CHECKLIST
+
+**COMPLETE THIS VERIFICATION BEFORE GENERATING OUTPUT:**
+
+□ Advisor name extracted: ___________
+□ Student name extracted: ___________
+□ Program name identified: ___________
+□ Call length calculated: _____ minutes
+□ Current date formatted: ___________
+□ Template substitution completed: YES/NO
+□ Bold formatting correct (no extra spaces): YES/NO
+□ All pipe symbols properly spaced: YES/NO
+□ Date format matches "Month DD, YYYY": YES/NO
+□ Call length is whole number: YES/NO
+
+**CRITICAL CHECKPOINTS:**
+- Title starts with exactly `**Advisor:` (no space after **): YES/NO
+- Title ends with exactly `**` (no space before **): YES/NO
+- Date has no leading zeros for single-digit days: YES/NO
+- All field values are non-empty strings: YES/NO
+
+**IF ANY VALIDATION = NO: STOP AND RECALCULATE**
+
+---
+
+## CONSISTENCY VERIFICATION EXAMPLES
+
+**Test Case 1: Standard Conversation**
+- Input: Advisor "Sean Little", Student "Jordan Hering", PE program, 25-minute call
+- Expected output: `**Advisor: Sean Little | Student: Jordan Hering | Program: Physical Education (Non-licensure) | Call Length: 25 minutes | Evaluated On: June 16, 2025**`
+
+**Test Case 2: Different Date Format**
+- Same input on January 5, 2025
+- Expected output: `**Advisor: Sean Little | Student: Jordan Hering | Program: Physical Education (Non-licensure) | Call Length: 25 minutes | Evaluated On: January 5, 2025**`
+
+**Test Case 3: Different Program**
+- Business program conversation
+- Expected output: `**Advisor: [Name] | Student: [Name] | Program: Business | Call Length: [X] minutes | Evaluated On: [Date]**`
+
+---
+
+## ERROR HANDLING PROTOCOLS
+
+**EXTRACTION ERRORS:**
+- Missing advisor name: RETURN "ERROR_ADVISOR_NAME_EXTRACTION_FAILED"
+- Missing student name: RETURN "ERROR_STUDENT_NAME_EXTRACTION_FAILED"
+- Invalid timestamp format: RETURN "ERROR_TIMESTAMP_PARSING_FAILED"
+- Duration calculation error: RETURN "ERROR_CALL_LENGTH_CALCULATION_FAILED"
+
+**FORMAT COMPLIANCE ERRORS:**
+- Template substitution failure: RETURN "ERROR_TEMPLATE_SUBSTITUTION_FAILED"
+- Bold formatting error: RETURN "ERROR_BOLD_FORMAT_INVALID"
+- Date formatting error: RETURN "ERROR_DATE_FORMAT_INVALID"
+
+---
+
+## FINAL CONSISTENCY GUARANTEE
+
+**THIS ALGORITHM GUARANTEES:**
+- Identical inputs produce byte-for-byte identical outputs
+- Zero subjective interpretation in name extraction
+- Mathematical precision in call length calculation
+- Exact template compliance with no variations
+- Deterministic date formatting with consistent rules
+
+**CRITICAL SUCCESS METRIC:** Running this prompt with identical transcripts and dates 1000 times MUST produce 1000 identical title outputs with zero variance.
+
+**VERIFICATION REQUIREMENT:** Any output that cannot be reproduced exactly using this protocol indicates implementation failure and requires system remediation.
