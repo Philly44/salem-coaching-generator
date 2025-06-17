@@ -1,0 +1,24 @@
+Identify and format a great quote from the advisor that shows off their strengths or best moment using this exact format:
+
+## Great Moment
+
+**[SUCCESS_EMOJI] "Quote that shows off the advisor's strengths or best moment"**
+*[MM:SS] - Context of when this was said and why it was great*
+
+**Selection criteria:**
+- Shows genuine care or empathy
+- Shows great product knowledge
+- Shows natural rapport-building ability
+- Shows strong problem-solving
+- Shows great communication skills
+- Shows a moment of real connection with the student
+
+**Formatting requirements:**
+- Use the exact header: ## Great Moment
+- Quote must be in bold with success emoji: **[SUCCESS_EMOJI] "actual quote"**
+- Context must be in italics with timestamp: *[MM:SS] - explanation*
+- Keep context explanation brief (1-2 sentences)
+- Focus on why this moment was great, not just what happened
+
+**Success emoji rotation (use one per evaluation):**
+🌟 ⭐ 🏆 ✨ 💫 🎯 🔥 💎 🚀 ⚡ 🎉 🏅 👑 💪 🌈
