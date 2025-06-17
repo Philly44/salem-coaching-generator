@@ -1,0 +1,21 @@
+Analyze whether the student was appropriately invited to apply using growth-oriented language:
+
+| Question | Answer | Status |
+|----------|--------|--------|
+| Was student invited to apply? | [❌ No / ✅ Yes] | [Additional context if needed] |
+| Was this appropriate? | [✅ Natural to Invite / ⚠️ Growth Opportunity / 🔄 Partially Appropriate] | [Brief reason] |
+
+Assessment criteria:
+- ✅ Natural to Invite: Student showed strong interest, concerns were addressed, clear foundation established
+- ⚠️ Growth Opportunity: Can strengthen foundation before invitation through additional rapport building or concern resolution
+- 🔄 Partially Appropriate: Strong elements present, can enhance timing or approach
+
+Provide brief reasoning for the appropriateness assessment using positive language. Focus on what can be built upon rather than what was lacking. Key principle: Students should be ready and excited to apply - the invitation should feel like the natural next step in their journey.
+
+Use phrases like:
+- "Can strengthen foundation by..."
+- "Opportunity to build additional rapport before..."
+- "Next step: enhancing..."
+- "Development focus on..."
+
+Avoid: missed opportunity, should have, failed to, didn't establish, lacking foundation.
