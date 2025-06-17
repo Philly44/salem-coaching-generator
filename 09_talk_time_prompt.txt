@@ -1,0 +1,204 @@
+# DETERMINISTIC TALK/LISTEN RATIO ANALYSIS PROMPT
+
+## CRITICAL REQUIREMENT: ZERO VARIANCE OUTPUT
+This prompt MUST produce byte-for-byte identical outputs when processing the same transcript 1000 times. Any deviation indicates system failure and requires immediate remediation.
+
+## MANDATORY INPUT VALIDATION
+
+**REQUIRED INPUT:**
+- Complete conversation transcript with speaker labels and speech content
+- Transcript must contain identifiable advisor and student speakers
+
+**VALIDATION CHECKLIST (COMPLETE BEFORE PROCESSING):**
+□ Transcript contains speaker identification lines: YES/NO
+□ Transcript contains speech content lines: YES/NO  
+□ Advisor and student speakers clearly identified: YES/NO
+□ No null, empty, or undefined transcript: YES/NO
+
+**ERROR HANDLING:**
+- IF any validation = NO: RETURN "ERROR_INVALID_TRANSCRIPT_DATA"
+- PROCEED only if all validations = YES
+
+---
+
+## ALGORITHM STEP 1: WORD COUNT CALCULATION
+
+**EXACT PARSING PROTOCOL:**
+```
+Initialize: advisor_words = 0, student_words = 0, current_speaker = null
+
+FOR each line in transcript:
+    line = trim(line)
+    
+    // Skip empty lines
+    IF line.length == 0: CONTINUE
+    
+    // Identify speaker lines (exact matching only)
+    IF line matches EXACTLY "JW" OR line matches EXACTLY "Jon Wagner":
+        current_speaker = "advisor"
+        CONTINUE
+    ELSE IF line matches EXACTLY "SB" OR line contains student name:
+        current_speaker = "student"  
+        CONTINUE
+    
+    // Skip timestamp lines (format: XX:XX)
+    IF line matches regex pattern "^\d{2}:\d{2}$":
+        CONTINUE
+    
+    // Count words in speech content
+    IF current_speaker != null AND line.length > 0:
+        words = split(line, whitespace).filter(non_empty)
+        word_count = words.length
+        
+        IF current_speaker == "advisor":
+            advisor_words += word_count
+        ELSE IF current_speaker == "student":
+            student_words += word_count
+
+total_words = advisor_words + student_words
+```
+
+## ALGORITHM STEP 2: PERCENTAGE CALCULATION
+
+**EXACT MATHEMATICAL OPERATIONS:**
+```
+advisor_percentage = (advisor_words / total_words) * 100
+student_percentage = (student_words / total_words) * 100
+
+// MANDATORY ROUNDING PROTOCOL
+advisor_percentage_rounded = Math.round(advisor_percentage)
+student_percentage_rounded = Math.round(student_percentage)
+
+// VALIDATION: Percentages must sum to 100% (allowing for rounding)
+percentage_sum = advisor_percentage_rounded + student_percentage_rounded
+IF percentage_sum < 99 OR percentage_sum > 101:
+    RETURN "ERROR_PERCENTAGE_CALCULATION_FAILURE"
+```
+
+## ALGORITHM STEP 3: PERFORMANCE LEVEL ASSIGNMENT
+
+**DETERMINISTIC PERFORMANCE MAPPING:**
+```
+advisor_percent = advisor_percentage_rounded
+
+IF (advisor_percent >= 40 AND advisor_percent <= 50):
+    performance_level = "Exceeds Expected Results"
+ELSE IF ((advisor_percent >= 30 AND advisor_percent <= 39) OR 
+         (advisor_percent >= 51 AND advisor_percent <= 60)):
+    performance_level = "Fully Effective"
+ELSE IF ((advisor_percent >= 20 AND advisor_percent <= 29) OR 
+         (advisor_percent >= 61 AND advisor_percent <= 75)):
+    performance_level = "Developing"  
+ELSE:
+    performance_level = "Does Not Meet Expected Results"
+```
+
+**PERFORMANCE LEVEL VALIDATION:**
+- Must be exactly one of 4 predefined strings (case-sensitive)
+- No variations, abbreviations, or modifications allowed
+
+---
+
+## MANDATORY OUTPUT GENERATION
+
+**EXACT TEMPLATE (ZERO MODIFICATIONS ALLOWED):**
+```
+| Talk/Listen Ratio | Performance Level | Industry Benchmark |
+|-------------------|--------------------|--------------------|
+| [ADVISOR_PERCENT]% / [STUDENT_PERCENT]% | [PERFORMANCE_LEVEL] | 43% / 57% (Optimal) |
+```
+
+**TEMPLATE SUBSTITUTION RULES:**
+- `[ADVISOR_PERCENT]` = advisor_percentage_rounded (integer only, no decimals)
+- `[STUDENT_PERCENT]` = student_percentage_rounded (integer only, no decimals)  
+- `[PERFORMANCE_LEVEL]` = performance_level (exact string from mapping)
+- Industry benchmark row NEVER changes: "43% / 57% (Optimal)"
+
+**FORMATTING REQUIREMENTS:**
+- Use exact pipe symbols and spacing as shown
+- No additional formatting (bold, italics, etc.)
+- No extra whitespace or line breaks
+- Header row exactly as specified
+- Data row exactly as specified
+
+---
+
+## PRE-OUTPUT VALIDATION CHECKLIST
+
+**COMPLETE THIS VERIFICATION BEFORE GENERATING OUTPUT:**
+
+□ Advisor word count calculated: _____
+□ Student word count calculated: _____
+□ Total words calculated: _____
+□ Advisor percentage calculated: _____.____%
+□ Student percentage calculated: _____.____%
+□ Advisor percentage rounded: _____%
+□ Student percentage rounded: _____%
+□ Percentage sum validation (99-101): YES/NO
+□ Performance level assigned: _____
+□ Performance level is valid option: YES/NO
+□ Template substitution completed: YES/NO
+□ Output format matches template exactly: YES/NO
+
+**CRITICAL CHECKPOINTS:**
+- Word counts are positive integers: YES/NO
+- Percentages sum to approximately 100%: YES/NO  
+- Performance level exactly matches predefined options: YES/NO
+- Table format is byte-for-byte identical to template: YES/NO
+
+**IF ANY VALIDATION = NO: STOP AND RECALCULATE**
+
+---
+
+## CONSISTENCY VERIFICATION EXAMPLES
+
+**Test Case 1: Advisor Dominates (2500 words advisor, 300 words student)**
+- Expected advisor percentage: 89% (rounded from 89.29%)
+- Expected student percentage: 11% (rounded from 10.71%)
+- Expected performance: "Does Not Meet Expected Results"
+- Expected output:
+```
+| Talk/Listen Ratio | Performance Level | Industry Benchmark |
+|-------------------|--------------------|--------------------|
+| 89% / 11% | Does Not Meet Expected Results | 43% / 57% (Optimal) |
+```
+
+**Test Case 2: Optimal Balance (430 words advisor, 570 words student)**
+- Expected advisor percentage: 43% (rounded from 43.00%)
+- Expected student percentage: 57% (rounded from 57.00%)
+- Expected performance: "Exceeds Expected Results"
+- Expected output:
+```
+| Talk/Listen Ratio | Performance Level | Industry Benchmark |
+|-------------------|--------------------|--------------------|
+| 43% / 57% | Exceeds Expected Results | 43% / 57% (Optimal) |
+```
+
+---
+
+## ERROR HANDLING PROTOCOLS
+
+**CALCULATION ERRORS:**
+- Division by zero: RETURN "ERROR_NO_WORDS_DETECTED"
+- Negative word counts: RETURN "ERROR_NEGATIVE_WORD_COUNT"
+- Invalid percentage calculation: RETURN "ERROR_PERCENTAGE_CALCULATION"
+- Performance mapping failure: RETURN "ERROR_PERFORMANCE_ASSIGNMENT"
+
+**FORMAT COMPLIANCE ERRORS:**
+- Template substitution failure: RETURN "ERROR_TEMPLATE_SUBSTITUTION"
+- Invalid table format: RETURN "ERROR_TABLE_FORMAT"
+
+---
+
+## FINAL CONSISTENCY GUARANTEE
+
+**THIS ALGORITHM GUARANTEES:**
+- Identical inputs produce byte-for-byte identical outputs
+- Zero subjective interpretation points
+- Complete reproducibility across unlimited runs
+- Mathematical determinism in all calculations
+- Exact template compliance with no variations
+
+**CRITICAL SUCCESS METRIC:** Running this prompt with identical transcripts 1000 times MUST produce 1000 identical outputs with zero variance.
+
+**VERIFICATION REQUIREMENT:** Any output that cannot be reproduced exactly using this protocol indicates implementation failure and requires system remediation.
