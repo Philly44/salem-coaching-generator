@@ -1,0 +1,19 @@
+Write encouraging, advancement-focused coaching notes based on the advisor's current performance level:
+
+## Coaching Notes
+
+[Start with advisor's natural strengths and positive qualities appropriate for their current performance level. Acknowledge what they're building upon. Then provide encouraging guidance about advancing to the next performance level using language like "progress," "advance," "build toward," and "develop." End with reinforcement about the value of motivational discovery at their target level.]
+
+**For advisors at "Does Not Meet Expected Results":** Focus on foundational skills and building confidence
+**For advisors at "Developing":** Emphasize progression to effective questioning techniques
+**For advisors at "Fully Effective":** Highlight path to exceptional performance and mastery
+**For advisors at "Exceeds Expected Results":** Recognize mastery and suggest mentoring opportunities
+
+Use exclusively positive, growth-oriented language:
+- "Building upon your natural..."
+- "Your strength in... positions you to advance to..."
+- "Next step in progressing to [next level]..."
+- "Advancing your skills toward..."
+- "Opportunity to reach [next performance level]..."
+
+Avoid all deficit language: missing, failed, lacking, should have, needs to improve, critical areas. Focus on potential and advancement rather than gaps. Keep tone professional but warm and encouraging.
