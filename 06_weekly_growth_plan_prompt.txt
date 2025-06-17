@@ -1,0 +1,368 @@
+# FINAL DETERMINISTIC WEEKLY GROWTH PLAN GENERATION PROMPT - CLEAN LABELS
+
+## CRITICAL REQUIREMENT: ZERO VARIANCE OUTPUT
+This prompt MUST produce byte-for-byte identical outputs when processing the same section scores 1000 times. Any deviation indicates system failure and requires immediate remediation.
+
+## MANDATORY INPUT VALIDATION
+
+**REQUIRED INPUTS (ALL MUST BE PROVIDED):**
+```
+Section_1_Performance = "[EXACT_PERFORMANCE_LEVEL]"
+Section_2_Performance = "[EXACT_PERFORMANCE_LEVEL]"
+Section_3_Performance = "[EXACT_PERFORMANCE_LEVEL]"
+Section_4_Performance = "[EXACT_PERFORMANCE_LEVEL]"
+Section_5_Performance = "[EXACT_PERFORMANCE_LEVEL]"
+```
+
+**VALIDATION CHECKLIST (COMPLETE BEFORE PROCESSING):**
+□ All 5 section performances provided: YES/NO
+□ Each performance level is one of exactly 4 values: YES/NO
+  - "Does Not Meet Expected Results"
+  - "Developing" 
+  - "Fully Effective"
+  - "Exceeds Expected Results"
+□ No typos or variations in performance level text: YES/NO
+□ No null, empty, or undefined values: YES/NO
+
+**ERROR HANDLING:**
+- IF any validation = NO: RETURN "ERROR_INVALID_INPUT_DATA"
+- IF unrecognized performance level: RETURN "ERROR_UNRECOGNIZED_PERFORMANCE_LEVEL: [VALUE]"
+- PROCEED only if all validations = YES
+
+---
+
+## ALGORITHM STEP 1: STRATEGY 1 SELECTION (SECTION 1 FOCUS)
+
+**EXACT MAPPING TABLE - NO INTERPRETATION ALLOWED:**
+
+```
+STRATEGY_1_LOOKUP = {
+    "Does Not Meet Expected Results": {
+        "name": "Foundation Building Through Basic Inquiry",
+        "phrases": [
+            "Tell me about your interest in this field",
+            "What drew you to consider this program?",
+            "Help me understand your background"
+        ],
+        "timing": "Early in conversation to establish baseline connection"
+    },
+    "Developing": {
+        "name": "Systematic Questioning Development", 
+        "phrases": [
+            "What are your career goals with this degree?",
+            "How do you see this program impacting your life?",
+            "What difference do you want to make in your field?"
+        ],
+        "timing": "After initial rapport is established"
+    },
+    "Fully Effective": {
+        "name": "Advanced Motivational Discovery",
+        "phrases": [
+            "What would success look like to you five years from now?",
+            "How will this transformation affect your family's future?",
+            "What legacy do you want to create in your profession?"
+        ],
+        "timing": "During deep rapport-building phase"
+    },
+    "Exceeds Expected Results": {
+        "name": "Mastery-Level Engagement Techniques",
+        "phrases": [
+            "Paint me a picture of your ideal career scenario",
+            "What's the deeper purpose driving this decision?",
+            "How does this align with your core values?"
+        ],
+        "timing": "Throughout conversation as natural connection points"
+    }
+}
+
+Strategy_1 = STRATEGY_1_LOOKUP[Section_1_Performance]
+```
+
+---
+
+## ALGORITHM STEP 2: STRATEGY 2 SELECTION (GAP-BASED PRIORITY)
+
+**STEP 2A: SCAN SECTIONS 2-5 FOR GAPS**
+
+```
+Gap_Analysis = []
+
+SECTIONS_TO_SCAN = [2, 3, 4, 5]
+FOR section_number in SECTIONS_TO_SCAN:
+    section_performance = get_section_performance(section_number)
+    
+    IF section_performance == "Does Not Meet Expected Results":
+        Gap_Analysis.append([section_number, 1])  // Priority 1 = Critical Gap
+    ELSE IF section_performance == "Developing":
+        Gap_Analysis.append([section_number, 2])  // Priority 2 = Development Gap
+    // Skip "Fully Effective" and "Exceeds Expected Results"
+```
+
+**STEP 2B: APPLY DETERMINISTIC SELECTION LOGIC**
+
+```
+IF Gap_Analysis is empty:
+    // No gaps found - use excellence strategy
+    Strategy_2 = EXCELLENCE_STRATEGY
+    Priority_Section_Number = "N/A"
+ELSE:
+    // Find highest priority gaps (lowest number = highest priority)
+    Highest_Priority = minimum priority value in Gap_Analysis
+    Tied_Sections = all section numbers with Highest_Priority
+    
+    // NATURAL PROGRESSION TIE-BREAKER
+    Natural_Order = [2, 3, 4, 5]  // Foundation → Confidence → Practical → Action
+    FOR section in Natural_Order:
+        IF section in Tied_Sections:
+            Priority_Section_Number = section
+            Priority_Performance_Level = get_section_performance(section)
+            Strategy_2 = GAP_STRATEGY_LOOKUP[Priority_Section_Number][Priority_Performance_Level]
+            BREAK
+```
+
+**STEP 2C: STRATEGY 2 LOOKUP TABLES**
+
+```
+GAP_STRATEGY_LOOKUP = {
+    2: {  // Program Structure & Information
+        "Does Not Meet Expected Results": {
+            "name": "Essential Program Details Delivery",
+            "phrases": [
+                "The program is delivered entirely online",
+                "You'll take one class at a time for 8 weeks each",
+                "Each course is designed to fit your schedule"
+            ],
+            "timing": "When student asks about program logistics"
+        },
+        "Developing": {
+            "name": "Comprehensive Program Structure Explanation",
+            "phrases": [
+                "Let me walk you through the semester structure",
+                "The online format includes live and recorded sessions",
+                "You'll have flexibility in when you complete assignments"
+            ],
+            "timing": "After establishing interest and before discussing finances"
+        }
+    },
+    3: {  // School Resources & Support
+        "Does Not Meet Expected Results": {
+            "name": "Core Support Services Introduction",
+            "phrases": [
+                "You'll have access to tutoring services",
+                "Our library resources are available 24/7 online",
+                "Your success coach will check in regularly"
+            ],
+            "timing": "When addressing student concerns about support"
+        },
+        "Developing": {
+            "name": "Comprehensive Support Network Overview",
+            "phrases": [
+                "The writing center helps with every assignment",
+                "Technical support is available whenever you need it",
+                "Career services will help you leverage your degree"
+            ],
+            "timing": "After program structure discussion"
+        }
+    },
+    4: {  // Financial Information & Payment Options
+        "Does Not Meet Expected Results": {
+            "name": "Essential Financial Information Delivery",
+            "phrases": [
+                "Let me share the investment details with you",
+                "We'll help you complete your FAFSA application",
+                "There are several payment options available"
+            ],
+            "timing": "When student shows strong interest in the program"
+        },
+        "Developing": {
+            "name": "Comprehensive Financial Planning Discussion",
+            "phrases": [
+                "Federal financial aid can cover a significant portion",
+                "Our payment plans make this very manageable",
+                "Many students qualify for additional scholarships"
+            ],
+            "timing": "After confirming program fit and before next steps"
+        }
+    },
+    5: {  // Next Steps & Follow-up Planning
+        "Does Not Meet Expected Results": {
+            "name": "Basic Follow-up Process Establishment",
+            "phrases": [
+                "I'd like to schedule a follow-up call with you",
+                "The next step would be to submit your application",
+                "When would be a good time to connect again?"
+            ],
+            "timing": "Near the end of the conversation"
+        },
+        "Developing": {
+            "name": "Structured Next Steps Planning",
+            "phrases": [
+                "Let's schedule your enrollment conversation for tomorrow",
+                "I'll call you back on Friday to finalize everything",
+                "You can start your application right after our call"
+            ],
+            "timing": "After addressing all questions and confirming interest"
+        }
+    }
+}
+
+EXCELLENCE_STRATEGY = {
+    "name": "Advanced Consultation Mastery",
+    "phrases": [
+        "What questions haven't I asked that I should have?",
+        "How else can I help you feel confident about this decision?",
+        "What would make this the perfect next step for you?"
+    ],
+    "timing": "Throughout conversation as natural enhancement opportunities"
+}
+```
+
+---
+
+## ALGORITHM STEP 3: FOCUS AREA CALCULATION
+
+**DETERMINISTIC FOCUS AREA LOGIC:**
+
+```
+Section_1_Level = Section_1_Performance
+Gap_Count = COUNT of sections 2-5 with ("Does Not Meet Expected Results" OR "Developing")
+
+// EXACT CONDITIONAL LOGIC - NO INTERPRETATION
+IF (Section_1_Level == "Does Not Meet Expected Results") OR (Section_1_Level == "Developing"):
+    IF Gap_Count >= 2:
+        Focus_Area = "Foundation Building with Multi-Area Development"
+    ELSE IF Gap_Count == 1:
+        Focus_Area = "Rapport Building with Targeted Skill Enhancement"
+    ELSE IF Gap_Count == 0:
+        Focus_Area = "Advanced Rapport Development"
+ELSE:
+    // Section 1 is "Fully Effective" or "Exceeds Expected Results"
+    IF Gap_Count >= 2:
+        Focus_Area = "Excellence Maintenance with Strategic Improvements"
+    ELSE IF Gap_Count == 1:
+        Focus_Area = "Performance Optimization"
+    ELSE IF Gap_Count == 0:
+        Focus_Area = "Mastery-Level Coaching Excellence"
+```
+
+---
+
+## MANDATORY OUTPUT GENERATION
+
+**STEP 4: CLEAN TEMPLATE SUBSTITUTION (UPDATED FORMAT)**
+
+**CLEAN STRATEGY LABEL MAPPING:**
+```
+CLEAN_STRATEGY_LABELS = {
+    2: "Program Information Focus",
+    3: "Support Services Focus", 
+    4: "Financial Planning Focus",
+    5: "Next Steps Focus"
+}
+
+IF Priority_Section_Number == "N/A":
+    Strategy_2_Label = "*(Excellence Enhancement Focus)*"
+ELSE:
+    Strategy_2_Label = "*(" + CLEAN_STRATEGY_LABELS[Priority_Section_Number] + ")*"
+```
+
+**UPDATED OUTPUT TEMPLATE:**
+```
+## Weekly Growth Plan - {FOCUS_AREA}
+
+**Strategy #1: {STRATEGY_1_NAME}** *(Rapport Building Focus)*
+- **Key Phrases:**
+  - "{STRATEGY_1_PHRASE_1}"
+  - "{STRATEGY_1_PHRASE_2}"
+  - "{STRATEGY_1_PHRASE_3}"
+- **When to Use:** {STRATEGY_1_TIMING}
+
+**Strategy #2: {STRATEGY_2_NAME}** {STRATEGY_2_LABEL}
+- **Key Phrases:**
+  - "{STRATEGY_2_PHRASE_1}"
+  - "{STRATEGY_2_PHRASE_2}"
+  - "{STRATEGY_2_PHRASE_3}"
+- **When to Use:** {STRATEGY_2_TIMING}
+```
+
+---
+
+## PRE-OUTPUT VALIDATION CHECKLIST
+
+**COMPLETE THIS VERIFICATION BEFORE GENERATING OUTPUT:**
+
+□ Section 1 performance validated: ___________
+□ Strategy 1 selected from lookup table: ___________
+□ Sections 2-5 gap analysis completed: ___________
+□ Gap count calculated: ___________
+□ Priority section identified (or "N/A"): ___________
+□ Strategy 2 selected from lookup table: ___________
+□ Focus area calculated using exact logic: ___________
+□ Clean labels applied: ___________
+□ All template placeholders have values: YES/NO
+□ Output format matches template exactly: YES/NO
+□ All phrases match predefined lists exactly: YES/NO
+
+**CRITICAL CHECKPOINTS:**
+- Strategy 1 name contains exactly one of 4 predefined names: YES/NO
+- Strategy 2 name contains exactly one of 9 predefined names: YES/NO
+- Focus area contains exactly one of 6 predefined focus areas: YES/NO
+- All phrases are exact matches from lookup tables: YES/NO
+- Clean labels used instead of section references: YES/NO
+
+**IF ANY VALIDATION = NO: STOP AND RECALCULATE**
+
+---
+
+## ERROR HANDLING AND EDGE CASES
+
+**CALCULATION ERRORS:**
+- Invalid section performance: RETURN "ERROR_INVALID_SECTION_PERFORMANCE"
+- Gap analysis failure: RETURN "ERROR_GAP_ANALYSIS_FAILURE"
+- Strategy lookup failure: RETURN "ERROR_STRATEGY_LOOKUP_FAILURE"
+- Template substitution failure: RETURN "ERROR_TEMPLATE_FAILURE"
+
+**VALIDATION FAILURES:**
+- Pre-output validation failure: RETURN "ERROR_VALIDATION_FAILURE"
+- Format compliance failure: RETURN "ERROR_FORMAT_COMPLIANCE_FAILURE"
+
+---
+
+## CONSISTENCY VERIFICATION EXAMPLES
+
+**Test Case 1: All Sections "Developing"**
+- Input: All 5 sections = "Developing"
+- Expected Strategy 1: "Systematic Questioning Development"
+- Expected Strategy 2: "Essential Program Details Delivery" (Section 2 wins tie-breaker)
+- Expected Strategy 2 Label: "*(Program Information Focus)*"
+- Expected Focus: "Foundation Building with Multi-Area Development"
+
+**Test Case 2: Section 1 "Fully Effective", Section 4 "Does Not Meet"**
+- Input: Section 1 = "Fully Effective", Section 4 = "Does Not Meet Expected Results"
+- Expected Strategy 1: "Advanced Motivational Discovery"
+- Expected Strategy 2: "Essential Financial Information Delivery"
+- Expected Strategy 2 Label: "*(Financial Planning Focus)*"
+- Expected Focus: "Performance Optimization"
+
+**Test Case 3: All Sections "Exceeds Expected Results"**
+- Input: All 5 sections = "Exceeds Expected Results"
+- Expected Strategy 1: "Mastery-Level Engagement Techniques"
+- Expected Strategy 2: "Advanced Consultation Mastery"
+- Expected Strategy 2 Label: "*(Excellence Enhancement Focus)*"
+- Expected Focus: "Mastery-Level Coaching Excellence"
+
+---
+
+## FINAL CONSISTENCY GUARANTEE
+
+**THIS ALGORITHM GUARANTEES:**
+- Identical inputs produce byte-for-byte identical outputs
+- Zero subjective interpretation points
+- Complete reproducibility across unlimited runs
+- Mathematical determinism in all decision points
+- Exact template compliance with no variations
+- Clean, professional labels without section references
+
+**CRITICAL SUCCESS METRIC:** Running this prompt with identical section performances 1000 times MUST produce 1000 identical outputs with zero variance.
+
+**CLEAN LABEL IMPROVEMENT:** All strategy labels now use descriptive focus areas instead of technical section references, improving readability while maintaining deterministic consistency.
