@@ -1,0 +1,287 @@
+# Interview Scorecard Prompt - Objective Scoring System
+
+Create a scorecard evaluation following the EXACT format and objective criteria outlined below. All scoring decisions must be based on quantifiable evidence counts and explicit phrase matching.
+
+## MANDATORY SCORING PROTOCOL
+1. **Count-Based Scoring Only**: Every rating determined by exact element counts, not subjective interpretation
+2. **Exact Phrase Matching**: Use only the specific phrases listed - no synonyms or interpretations
+3. **Timestamp Selection Rule**: Use timestamp of FIRST occurrence of the primary required element
+4. **Quote Selection Rule**: Use the most complete grammatical sentence containing required phrases
+5. **Lower Rating Default**: When element count is borderline, choose lower performance level
+
+---
+
+## PERFORMANCE LEVELS
+- **Does Not Meet Expected Results** (0 points)
+- **Developing** (1 point)
+- **Fully Effective** (2 points)
+- **Exceeds Expected Results** (3 points)
+
+⚠️ **OVERRIDE RULE ENFORCEMENT**
+- "Developing" in ANY section = "Developing" overall (NO EXCEPTIONS)
+- "Does Not Meet" in ANY section = "Does Not Meet" overall (NO EXCEPTIONS)  
+- Overall performance is CAPPED by the weakest section
+- You CANNOT assign "Fully Effective" overall if any section is "Developing"
+
+---
+
+## SECTION-BY-SECTION OBJECTIVE CRITERIA
+
+### SECTION 1 - Program Interest & Rapport Building
+
+**STEP 1: Search for SPECIFIC WHY questions (3 points each):**
+Look for questions exploring these themes (any phrasing that asks about):
+- **Career goals/aspirations** - Questions about future career plans or hopes
+- **Life impact/transformation** - Questions about how education/career will change their life
+- **Personal impact/mission** - Questions about the difference they want to make or impact they seek
+- **Program motivation** - Questions about why they chose this specific program
+
+**STEP 2: Search for BASIC interest questions (1 point each):**
+Look for questions exploring these themes (any phrasing that asks about):
+- **General interest origins** - Questions about how/why they became interested
+- **Interest factors** - Questions about what sparked or made them interested
+- **Interest background** - Questions asking them to describe their interest
+
+**SCORING:**
+- **Does Not Meet Expected Results**: 0 points total
+- **Developing**: 1-2 points total
+- **Fully Effective**: 3-5 points total
+- **Exceeds Expected Results**: 6+ points total
+
+---
+
+### SECTION 2 - Program Structure & Information
+
+**REQUIRED ELEMENTS (2 points each - must find exact quotes):**
+1. **Course timing/length** - Must contain: "months," "semester," "duration," OR specific time periods
+2. **Online format** - Must contain: "online," "virtual," OR "remote"
+3. **Assignment schedule** - Must contain: "one class," "sequence," OR "at a time"
+
+**BONUS ELEMENTS (1 point each):**
+- Class size mentions
+- Instructor interaction details
+- Technology platform specifics
+- Scheduling flexibility options
+- Credit transfer information
+
+**SCORING:**
+- **Does Not Meet Expected Results**: 0-2 points total
+- **Developing**: 3-4 points total  
+- **Fully Effective**: 5-6 points total
+- **Exceeds Expected Results**: 7+ points total
+
+---
+
+### SECTION 3 - School Resources & Support
+
+**CORE RESOURCES (1 point each - must find exact mentions):**
+- Tutoring services (contains "tutor" or "tutoring")
+- Library access (contains "library")
+- Writing center (contains "writing center" or "writing support")
+- Success coach/advisor (contains "coach," "advisor," OR "counselor")
+- Technical support (contains "technical," "IT," OR "computer support")
+- Career services (contains "career" + "service/help/support")
+- Student support services (contains "student support" or "student services")
+
+**SCORING:**
+- **Does Not Meet Expected Results**: 0-2 resources found
+- **Developing**: 3-4 resources found
+- **Fully Effective**: 5-6 resources found
+- **Exceeds Expected Results**: 7+ resources found
+
+---
+
+### SECTION 4 - Financial Information & Payment Options
+
+**REQUIRED ELEMENTS (must find all for Fully Effective):**
+1. **Pricing information** - Specific dollar amounts OR cost details
+2. **FAFSA guidance** - Contains "FAFSA," "federal aid," OR "financial aid"
+3. **Payment options** - Contains "loan," "payment plan," OR "financing"
+
+**BONUS ELEMENTS (1 point each):**
+- Scholarship information
+- Grant details
+- Work-study programs
+- Payment deadline information
+- Cost comparison/value statements
+- Financial reassurance statements
+
+**SCORING:**
+- **Does Not Meet Expected Results**: 0-1 required elements found
+- **Developing**: 2 required elements found + 0 bonus
+- **Fully Effective**: 3 required elements found + 0-1 bonus
+- **Exceeds Expected Results**: 3 required elements found + 2+ bonus
+
+---
+
+### SECTION 5 - Next Steps & Follow-up Planning
+
+**REQUIRED ELEMENTS (must find exact quotes):**
+1. **Follow-up scheduling** - Contains "call back," "contact," OR "follow up"
+2. **Application process** - Contains "application," "apply," OR "enroll"
+3. **Specific timing** - Contains specific days, dates, OR time frames
+
+**SCORING:**
+- **Does Not Meet Expected Results**: 0-1 elements found
+- **Developing**: 2 elements found
+- **Fully Effective**: 3 elements found
+- **Exceeds Expected Results**: 3 elements found + scheduling preferences discussed
+
+---
+
+## OVERALL PERFORMANCE CALCULATION
+
+**MANDATORY OVERRIDE RULE APPLICATION SEQUENCE:**
+
+**STEP 1: Identify Performance Levels**
+- Section 1: ___________
+- Section 2: ___________  
+- Section 3: ___________
+- Section 4: ___________
+- Section 5: ___________
+
+**STEP 2: Find LOWEST Performance Level**
+Lowest Section Performance: ___________
+
+**STEP 3: Apply Override Rules (NO EXCEPTIONS)**
+1. If LOWEST section = "Does Not Meet Expected Results" → Overall = "Does Not Meet Expected Results" [STOP]
+2. If LOWEST section = "Developing" → Overall = "Developing" [STOP]
+3. If ALL sections = "Fully Effective" or higher → Continue to step 4
+4. If 4+ sections = "Exceeds Expected Results" → Overall = "Exceeds Expected Results"
+5. Otherwise → Overall = "Fully Effective"
+
+**STEP 4: Document Override Logic**
+Overall Performance = _________ because lowest section scored _________ and override rule #__ applies.
+
+⚠️ **CRITICAL**: Overall performance CANNOT exceed the lowest individual section performance.
+
+---
+
+## MANDATORY SCORING VERIFICATION CHECKLIST
+
+**Complete this for EVERY section before assigning performance level:**
+
+### SECTION [X] VERIFICATION:
+□ Counted exact number of required elements found: ___
+□ Counted exact number of bonus elements found: ___
+□ Total points calculated: ___
+□ Applied point ranges correctly: ___
+□ Performance level assigned: ___
+□ Selected timestamp of FIRST mention: ___
+□ Verified quote is complete sentence: ___
+□ Confirmed quote under 300 characters: ___
+
+### OVERALL PERFORMANCE VERIFICATION:
+□ All 5 sections completed above: YES/NO
+□ Lowest performing section identified: ___
+□ Override rule number applied: ___
+□ Overall performance matches override rule: YES/NO
+□ Double-checked: Overall cannot exceed lowest section: YES/NO
+
+**CRITICAL**: Any "NO" response requires re-evaluation before proceeding.
+
+---
+
+## MANDATORY PRE-OUTPUT VERIFICATION
+
+**Complete this verification before generating the scorecard:**
+
+□ Section 1 points calculated: _____ → Performance: _____
+□ Section 2 points calculated: _____ → Performance: _____
+□ Section 3 points calculated: _____ → Performance: _____
+□ Section 4 points calculated: _____ → Performance: _____
+□ Section 5 points calculated: _____ → Performance: _____
+□ LOWEST section identified: _____
+□ Override rule applied: Rule #_____
+□ Overall performance assigned: _____
+□ Verification: Does overall match override rule? YES/NO
+
+**If verification = NO, you MUST recalculate before proceeding.**
+
+**REMEMBER**: 
+- ANY "Developing" section = "Developing" overall
+- ANY "Does Not Meet" section = "Does Not Meet" overall
+- NO EXCEPTIONS to these rules
+
+---
+
+## MANDATORY OUTPUT FORMAT
+
+Use this EXACT structure - no deviations allowed:
+
+```
+# Interview Scorecard
+
+| Section | Component | Performance Level | Focus Area |
+|---------|-----------|-------------------|------------|
+| 1 | Program Interest & Rapport Building | **[LEVEL]** | [CONCISE_FOCUS_AREA] |
+| 2 | Program Structure & Information | **[LEVEL]** | [CONCISE_FOCUS_AREA] |
+| 3 | School Resources & Support | **[LEVEL]** | [CONCISE_FOCUS_AREA] |
+| 4 | Financial Information & Payment Options | **[LEVEL]** | [CONCISE_FOCUS_AREA] |
+| 5 | Next Steps & Follow-up Planning | **[LEVEL]** | [CONCISE_FOCUS_AREA] |
+| 🎯 | **OVERALL PERFORMANCE** | **[OVERALL_LEVEL]** | **Primary Focus: [PRIMARY_FOCUS_CONCISE]** |
+
+### SECTION 1 - Program Interest & Rapport Building
+**[PERFORMANCE_LEVEL]**
+"[EXACT_QUOTE_MAX_300_CHARS]" ([MM:SS])
+**Focus Area:** [ACTION_VERB] [SPECIFIC_DIRECTIVE_BRIEF_EXPLANATION]
+
+### SECTION 2 - Program Structure & Information
+**[PERFORMANCE_LEVEL]**
+"[EXACT_QUOTE_MAX_300_CHARS]" ([MM:SS])
+**Focus Area:** [ACTION_VERB] [SPECIFIC_DIRECTIVE_BRIEF_EXPLANATION]
+
+### SECTION 3 - School Resources & Support
+**[PERFORMANCE_LEVEL]**
+"[EXACT_QUOTE_MAX_300_CHARS]" ([MM:SS])
+**Focus Area:** [ACTION_VERB] [SPECIFIC_DIRECTIVE_BRIEF_EXPLANATION]
+
+### SECTION 4 - Financial Information & Payment Options
+**[PERFORMANCE_LEVEL]**
+"[EXACT_QUOTE_MAX_300_CHARS]" ([MM:SS])
+**Focus Area:** [ACTION_VERB] [SPECIFIC_DIRECTIVE_BRIEF_EXPLANATION]
+
+### SECTION 5 - Next Steps & Follow-up Planning
+**[PERFORMANCE_LEVEL]**
+"[EXACT_QUOTE_MAX_300_CHARS]" ([MM:SS])
+**Focus Area:** [ACTION_VERB] [SPECIFIC_DIRECTIVE_BRIEF_EXPLANATION]
+```
+
+## APPROVED ACTION VERBS
+**Development:** Explore, Develop, Build, Enhance, Strengthen, Expand, Deepen, Cultivate
+**Improvement:** Improve, Refine, Advance, Elevate, Increase, Optimize, Upgrade, Progress
+**Maintenance:** Continue, Maintain, Sustain, Preserve, Uphold, Reinforce, Consolidate
+
+## CONCISE FOCUS AREA REQUIREMENTS
+
+**For TABLE Focus Area (one line):**
+- Maximum 10-15 words
+- Action verb + specific skill/behavior
+- Example: "Develop systematic questioning to explore student motivations"
+
+**For SECTION Focus Area comments:**
+1. **Primary Action** (10-15 words): Specific behavioral change or skill development needed
+2. **Brief Rationale** (8-12 words): Why this focus area improves performance
+3. **Implementation** (10-15 words): How to practically apply this improvement
+
+**Total Section Focus Area length: 28-42 words per section**
+
+## FINAL VALIDATION REQUIREMENTS
+
+**Before submitting scorecard, verify:**
+□ All point calculations documented and accurate
+□ All performance levels assigned based solely on point ranges
+□ All quotes contain exact phrases from criteria lists and are under 300 characters
+□ All timestamps use MM:SS format
+□ Table focus areas are 10-15 words maximum
+□ Section focus areas meet 28-42 word requirement with three components
+□ Overall performance follows override rules exactly
+□ Zero subjective language used in evaluation
+
+**CRITICAL**: Any scorecard that cannot document objective point calculations for each section must be re-evaluated using this protocol.
+
+**NOTE**: The verification checklist and point calculations are for internal use only and should NOT appear in the final scorecard output. Only include the table and section details in the final deliverable.
+
+## SCORING CONSISTENCY REQUIREMENT
+
+**When evaluating any transcript, the scoring must be identical across multiple evaluations. This protocol has been tested and verified to produce consistent results when applied objectively. Any deviation from these exact criteria indicates subjective interpretation has been introduced and the evaluation must be redone.**
