@@ -1,0 +1,1 @@
+# salem-coaching-generator
