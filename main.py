@@ -21,7 +21,7 @@ st.set_page_config(
 
 class SalemCoachingGenerator:
     def __init__(self, api_key):
-        self.client = anthropic.Anthropic(api_key=api_key, max_retries=3)
+        self.client = anthropic.Anthropic(api_key=api_key)
         self.styles = getSampleStyleSheet()
         self.setup_custom_styles()
     
