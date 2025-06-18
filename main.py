@@ -116,7 +116,7 @@ class SalemCoachingGenerator:
             alignment=TA_JUSTIFY
         )
 
-   def call_claude_with_prompt(self, prompt_content, transcript):
+def call_claude_with_prompt(self, prompt_content, transcript):
         try:
             message = self.client.messages.create(
                 model="claude-3-5-sonnet-20241022",
