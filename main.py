@@ -129,6 +129,8 @@ def call_claude_with_prompt(self, prompt_content, transcript):
                 ]
             )
             return message.content[0].text
+        except Exception as e:
+            return f"Error calling Claude API: {str(e)}"
             
         except Exception as e:
             return f"Error calling Claude API: {str(e)}"
