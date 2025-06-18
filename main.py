@@ -21,7 +21,7 @@ st.set_page_config(
 
 class SalemCoachingGenerator:
     def __init__(self, api_key):
-        self.client = anthropic.Anthropic(api_key=api_key)
+        self.client = anthropic.Anthropic(api_key=api_key, max_retries=3)
         self.styles = getSampleStyleSheet()
         self.setup_custom_styles()
     
@@ -116,7 +116,7 @@ class SalemCoachingGenerator:
             alignment=TA_JUSTIFY
         )
 
-    def call_claude_with_prompt(self, prompt_content, transcript):
+   def call_claude_with_prompt(self, prompt_content, transcript):
         try:
             message = self.client.messages.create(
                 model="claude-3-5-sonnet-20241022",
@@ -130,6 +130,7 @@ class SalemCoachingGenerator:
             )
             return message.content[0].text
         except Exception as e:
+            st.error(f"Claude API Error: {str(e)}")
             return f"Error calling Claude API: {str(e)}"
 
     def load_prompt_file(self, filename):
