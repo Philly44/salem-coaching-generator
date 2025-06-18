@@ -129,10 +129,10 @@ class SalemCoachingGenerator:
                 ]
             )
             return message.content[0].text
+            
         except Exception as e:
-            st.error(f"Claude API Error: {str(e)}")
             return f"Error calling Claude API: {str(e)}"
-
+            
     def load_prompt_file(self, filename):
         try:
             with open(filename, 'r', encoding='utf-8') as file:
