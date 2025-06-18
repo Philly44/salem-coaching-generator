@@ -116,7 +116,7 @@ class SalemCoachingGenerator:
             alignment=TA_JUSTIFY
         )
 
-def call_claude_with_prompt(self, prompt_content, transcript):
+    def call_claude_with_prompt(self, prompt_content, transcript):
         try:
             message = self.client.messages.create(
                 model="claude-3-5-sonnet-20241022",
@@ -131,11 +131,8 @@ def call_claude_with_prompt(self, prompt_content, transcript):
             return message.content[0].text
         except Exception as e:
             return f"Error calling Claude API: {str(e)}"
-            
-        except Exception as e:
-            return f"Error calling Claude API: {str(e)}"
-            
-def load_prompt_file(self, filename):
+
+    def load_prompt_file(self, filename):
         try:
             with open(filename, 'r', encoding='utf-8') as file:
                 return file.read()
@@ -143,7 +140,8 @@ def load_prompt_file(self, filename):
             return f"Error: Could not find prompt file {filename}"
         except Exception as e:
             return f"Error reading file {filename}: {str(e)}"
-def generate_complete_guide(self, transcript):
+
+    def generate_complete_guide(self, transcript):
         results = {}
         
         prompt_files = {
@@ -164,6 +162,7 @@ def generate_complete_guide(self, transcript):
                 results[section] = prompt_content
                 
         return results
+
     def parse_scorecard_table(self, scorecard_text):
         lines = scorecard_text.split('\n')
         table_data = []
@@ -379,7 +378,6 @@ def generate_complete_guide(self, transcript):
         buffer.close()
         
         return pdf_data
-
 
 def main():
     st.title("📊 Salem University Coaching Guide Generator")
