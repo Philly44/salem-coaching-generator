@@ -135,7 +135,7 @@ def call_claude_with_prompt(self, prompt_content, transcript):
         except Exception as e:
             return f"Error calling Claude API: {str(e)}"
             
-    def load_prompt_file(self, filename):
+def load_prompt_file(self, filename):
         try:
             with open(filename, 'r', encoding='utf-8') as file:
                 return file.read()
@@ -143,8 +143,7 @@ def call_claude_with_prompt(self, prompt_content, transcript):
             return f"Error: Could not find prompt file {filename}"
         except Exception as e:
             return f"Error reading file {filename}: {str(e)}"
-
-    def generate_complete_guide(self, transcript):
+def generate_complete_guide(self, transcript):
         results = {}
         
         prompt_files = {
@@ -165,7 +164,6 @@ def call_claude_with_prompt(self, prompt_content, transcript):
                 results[section] = prompt_content
                 
         return results
-
     def parse_scorecard_table(self, scorecard_text):
         lines = scorecard_text.split('\n')
         table_data = []
